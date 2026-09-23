@@ -11,37 +11,41 @@
     --color-font-body: hsl(200, 52%, 19%);
     --color-bg-h3: hsl(200, 100%, 60%);
     --color-font-h3: hsl(100, 80%, 15%);
-    --image-board: url('../img/water.webp');
+    --color-board-frame: hsl(15, 40%, 33%);
+    --img-board: url('../img/water.webp');
+    --img-cardback: url('../img/BACK.png');
+    --img-cardfront1: url('../img/Normal_bg.webp');
+    --img-cardfront2: url('../img/Pasisve_bg.webp');
 }
 
 #zen-intro{
     --pos-top: 70px;
     --pos-left: 500px;
-    --front-img: url('../img/newspaper2.jpg');
+    --front-img: var(--img-cardfront1);
     --front-color: rgb(211, 236, 250);
 }
 #zen-explanation{
     --pos-top: 520px;
     --pos-left: 300px;
-    --front-img: url('../img/newspaper2.jpg');
+    --front-img: var(--img-cardfront1);
     --front-color: rgb(211, 236, 250);
 }
 #zen-participation{
     --pos-top: 150px;
     --pos-left: 850px;
-    --front-img: url('../img/newspaper2.jpg');
+    --front-img: var(--img-cardfront1);
     --front-color: rgb(211, 236, 250);
 }
 #zen-benefits{
     --pos-top: 500px;
     --pos-left: 800px;
-    --front-img: url('../img/newspaper2.jpg');
+    --front-img: var(--img-cardfront2);
     --front-color: rgb(211, 236, 250);
 }
 #zen-requirements{
-    --pos-top: 100px;
+    --pos-top: 150px;
     --pos-left: 50px;
-    --front-img: url('../img/newspaper2.jpg');
+    --front-img: var(--img-cardfront1);
     --front-color: rgb(211, 236, 250);
 }
 
@@ -57,7 +61,7 @@ body{
 /* 2 --- Layout --- 2 */
 
 .page-wrapper{
-    background-image: var(--image-board);
+    background-image: var(--img-board);
     position: fixed;
     font-size: 0.7em;
     /* adjust left, top, width, height to make in middle */
@@ -65,14 +69,16 @@ body{
     width: 60%;
     height: 80vh;
     top: 10%;
+    border: 20px solid var(--color-board-frame);
 }
 
 
 
 /* relative position example */
-abbr{
+header abbr{
     position: relative;
     top: -2px;
+    font-size: 2em;
 }
 
 /* absolute position example */
@@ -82,7 +88,13 @@ article{
     left: var(--pos-left);
     width: 300px;
     height: 30vh;
-    background-color: var(--front-color);
+    background-image: var(--front-img);
+    background-size: cover;
+    overflow: scroll;
+    text-align: justify;
+    /* Element Model */
+    padding: 5px 5px 5px 5px; /* top, right, bottom, left */
+    border: 2px dotted darkblue;
 }
 /* Hide element for later */
 footer{
@@ -90,4 +102,48 @@ footer{
 }
 aside{
     display: none;
+}
+
+/* Web Font Example */
+header h1{
+    font-family: "Crafty Girls", cursive;
+    font-size: 3em;
+}
+
+/* Local Font */
+@font-face {
+    font-family: 'myFont';
+    src: url('../fonts/chunkfive.woff') format('woff'), 
+        url('../fonts/chunkfive.svg') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+header h2{
+    font-family: 'myFont', Arial, Helvetica, sans-serif;
+    font-size: 1.5em;
+}
+
+a{
+    text-transform: uppercase;
+}
+
+article h3{
+    text-align: center;
+    text-decoration: underline;
+}
+
+/* Understand display and visibility */
+
+#zen-participation h3{
+    /* display: none; */
+    /* visibility: hidden; */
+    /* opacity: 0; */
+}
+
+/* Advanced selectors */
+
+
+h3+p{ /* All paragraphs which are sibling of an h3 will be uppercase */
+    text-transform: uppercase;
 }
