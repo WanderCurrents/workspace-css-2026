@@ -7,6 +7,7 @@
 /* 1 --- Global Variables --- 1 */
 :root{
     --color-bg-body: #BFF5FE;
+    --color-bg-gradient: linear-gradient(to bottom, #a7d7ff, #222986);
     --color-bg-section: hsl(200, 100%, 80%);
     --color-font-body: hsl(200, 52%, 19%);
     --color-bg-h3: hsl(200, 100%, 60%);
@@ -23,36 +24,42 @@
     --pos-left: 500px;
     --front-img: var(--img-cardfront1);
     --front-color: rgb(211, 236, 250);
+    --card-rotate-degree: -25deg;
 }
 #zen-explanation{
     --pos-top: 520px;
     --pos-left: 300px;
     --front-img: var(--img-cardfront1);
     --front-color: rgb(211, 236, 250);
+    --card-rotate-degree: 25deg;    
 }
 #zen-participation{
     --pos-top: 150px;
     --pos-left: 850px;
     --front-img: var(--img-cardfront1);
     --front-color: rgb(211, 236, 250);
+    --card-rotate-degree: -40deg;
 }
 #zen-benefits{
     --pos-top: 500px;
     --pos-left: 800px;
     --front-img: var(--img-cardfront2);
     --front-color: rgb(211, 236, 250);
+    --card-rotate-degree: -12deg;
 }
 #zen-requirements{
     --pos-top: 150px;
     --pos-left: 50px;
     --front-img: var(--img-cardfront1);
     --front-color: rgb(211, 236, 250);
+    --card-rotate-degree: 5deg;
 }
 
 
 
 body{
-    background-color: var(--color-bg-body);
+    background-image: var(--color-bg-gradient);
+    height: 100vh;
     color: var(--color-font-body);
 }
 
@@ -86,23 +93,52 @@ article{
     position: absolute;
     top: var(--pos-top);
     left: var(--pos-left);
-    width: 300px;
-    height: 30vh;
-    background-image: var(--front-img);
+    /* REQUIRED: be able to rotate at different angles using variables */
+    transform: rotate(var(--card-rotate-degree));
+    background-image: var(--img-cardback);
+    width: 90px;
+    height: 150px;
     background-size: cover;
-    overflow: scroll;
+    overflow: hidden;
     text-align: justify;
     /* Element Model */
     padding: 5px 5px 5px 5px; /* top, right, bottom, left */
     border: 2px dotted darkblue;
+    border-radius: 4%;
 }
+/* Everything inside element */
+article > *{
+    opacity: 0;
+}
+
+article:active{
+    background-image: var(--front-img);
+    transform: rotate(calc(0 - var(--card-rotate-degree))); /* Fixes the tilt when card is selected */
+    width: 300px;
+    height: 500px;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    box-shadow: 25px 25px 25px black;
+}
+article:active > *{
+    opacity: 1;
+}
+
 /* Hide element for later */
 footer{
     display: none;
 }
+
+
 aside{
     display: none;
+
 }
+/* List style example */
+/* aside ul{
+    list-style-image: url("../img/star.png");
+} */
 
 /* Web Font Example */
 header h1{
@@ -146,4 +182,16 @@ article h3{
 
 h3+p{ /* All paragraphs which are sibling of an h3 will be uppercase */
     text-transform: uppercase;
+}
+
+/* More practice on selectors */
+article h3::first-letter{
+    font-size: 3em;
+}
+article:first-child{
+    text-shadow: 0.2em 0.2em 0.1em black;
+}
+/* Example: All even child elements */
+p:nth-child(2n){
+    box-shadow: -25pm -25px 50px black;
 }
