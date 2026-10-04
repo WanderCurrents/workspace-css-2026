@@ -13,6 +13,9 @@
     --color-bg-h3: hsl(200, 100%, 60%);
     --color-font-h3: hsl(100, 80%, 15%);
     --color-board-frame: hsl(15, 40%, 33%);
+    --color-board-shading: hsl(15, 40%, 25%);
+    --color-footer-contents: hsl(200, 100%, 50%);
+    --color-footer-bg: hsl(200, 100%, 30%);
     --img-board: url('../img/water.webp');
     --img-cardback: url('../img/BACK.png');
     --img-cardfront1: url('../img/Normal_bg.webp');
@@ -75,10 +78,21 @@ body{
     left: 20%;
     width: 60%;
     height: 80vh;
-    top: 10%;
+    top: 5%;
     border: 20px solid var(--color-board-frame);
-}
 
+    transform-origin: bottom center;
+    transform: perspective(1200px) rotateX(20deg) scale(1.1) translate(0px, 20px);
+    transform-style: preserve-3d;
+}
+.extra1{
+    position: fixed;
+    bottom: 0;
+    left: 318px;
+    width: 1310px;
+    height: 100px;
+    background-color: var(--color-board-shading); 
+}
 
 
 /* relative position example */
@@ -86,6 +100,11 @@ header abbr{
     position: relative;
     top: -2px;
     font-size: 2em;
+}
+
+.intro, .supporting{
+    /* This line breaks everything idk why */
+    display: contents;
 }
 
 /* absolute position example */
@@ -105,15 +124,20 @@ article{
     padding: 5px 5px 5px 5px; /* top, right, bottom, left */
     border: 2px dotted darkblue;
     border-radius: 4%;
+
+    transition: all 3s;
 }
 /* Everything inside element */
 article > *{
     opacity: 0;
+    transition: opacity 3s;
 }
 
 article:active{
     background-image: var(--front-img);
     transform: rotate(calc(0 - var(--card-rotate-degree))); /* Fixes the tilt when card is selected */
+    transform-origin: 500px;
+    transform: rotateX(-20deg);
     width: 300px;
     height: 500px;
     background-size: cover;
@@ -125,10 +149,6 @@ article:active > *{
     opacity: 1;
 }
 
-/* Hide element for later */
-footer{
-    display: none;
-}
 
 
 aside{
@@ -170,7 +190,6 @@ article h3{
 }
 
 /* Understand display and visibility */
-
 #zen-participation h3{
     /* display: none; */
     /* visibility: hidden; */
@@ -194,4 +213,32 @@ article:first-child{
 /* Example: All even child elements */
 p:nth-child(2n){
     box-shadow: -25pm -25px 50px black;
+}
+
+
+/* Style footer */
+footer{
+    position: fixed;    /* Makes it horizontal */
+    display: flex;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background-color: var(--color-footer-bg);
+    gap: 10px;
+    padding: 5px;
+
+}
+footer a{
+    background-color: var(--color-footer-contents);
+    text-decoration: none;
+    font-size: large;
+    padding: 3px;
+    
+    animation: horizontalmove 5s linear infinite;
+}
+
+@keyframes horizontalmove{
+    0%{transform: translateX(0);}
+    50%{transform: translateX(100%);}
+    100%{transform: translateX(0);}
 }
